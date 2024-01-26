@@ -39,19 +39,30 @@ def coffee_machine():
     user_input = input("What would you like? (espresso/latte/cappuccino): ")
 
     if user_input == "off":
+
         return None
 
     elif user_input == "report":
-        print(f"Water: {resources["water"]}ml")
-        print(f"Milk: {resources["milk"]}ml")
-        print(f"Coffee: {resources["coffee"]}g")
+
+        print(f'Water: {resources["water"]}ml')
+
+        print(f'Milk: {resources["milk"]}ml')
+
+        print(f'Coffee: {resources["coffee"]}g')
+
         print(f'Money: ${money["balance"]}')
+
         coffee_machine()
+
     else:
+
         is_enough = True
+
         for ingredient in MENU[user_input]["ingredients"]:
+
             if resources[ingredient] < MENU[user_input]["ingredients"][ingredient]:
                 print(f"Sorry there is not enough {ingredient}.")
+
                 is_enough = False
 
         if is_enough is False:
@@ -70,16 +81,23 @@ def coffee_machine():
         monetary_value = float(quarters * 0.25 + dimes * 0.1 + nickles * 0.05 + pennies * 0.01)
 
         if monetary_value < MENU[user_input]["cost"]:
+
             print("Sorry that's not enough money. Money refunded.")
+
             coffee_machine()
+
         else:
+
             money["balance"] += MENU[user_input]["cost"]
+
             monetary_value -= MENU[user_input]["cost"]
 
             if "water" in MENU[user_input]["ingredients"]:
                 resources["water"] -= MENU[user_input]["ingredients"]["water"]
+
             if "milk" in MENU[user_input]["ingredients"]:
                 resources["milk"] -= MENU[user_input]["ingredients"]["milk"]
+
             if "coffee" in MENU[user_input]["ingredients"]:
                 resources["coffee"] -= MENU[user_input]["ingredients"]["water"]
 
